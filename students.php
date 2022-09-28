@@ -9,6 +9,11 @@
 	<?php
       require_once('includes/header.php');
       require_once('includes/sidebar.php');
+
+      //fetch all user records
+      //1. database connection
+      require_once('dbconnection.php');
+      $fetchEnrolledStudents = mysqli_query($conn,"SELECT * FROM enrollments");
     ?>  
 	
 	<div class="main-content">
@@ -38,24 +43,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <td>1</td>
-                                    <td>Churchill</td>
-                                    <td>IN22/20269/22</td>
-                                    <td>+254798592877</td>
-                                    <td>churkakk@gmail.com</td>
-                                    <td>Web Design & Development</td>
-                                    <td>6th May 2022</td>
-                                    <td>
-                                        <a href="" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a href="" class="btn btn-success btn-sm">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-                                        <a href="" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
+                                    <?php while($row = mysqli_fetch_array($fetchEnrolledStudents)) { ?>
+                                        <tr>
+                                              <td><?php echo $row['Id']?></td>
+                                              <td><?php echo $row['name']?></td>
+                                              <td><?php echo $row['reg_number']?></td>
+                                              <td><?php echo $row['phone']?></td>
+                                              <td><?php echo $row['email']?></td>
+                                              <td><?php echo $row['course']?></td>
+                                              <td><?php echo $row['created_at']?></td>
+                                              <td>
+                                                  <a href="" class="btn btn-primary btn-sm">
+                                                     <i class="fa fa-edit"></i>
+                                                  </a>
+                                                  <a href="" class="btn btn-success btn-sm">
+                                                      <i class="fa fa-eye"></i>
+                                                  </a>
+                                                  <a href="" class="btn btn-danger btn-sm">
+                                                     <i class="fa fa-trash"></i>
+                                                  </a>
+                                              </td>
+                                        </tr>
+
+                                     <?php } ?>   
                                 </tbody>
                             </table>
                         </div>
@@ -72,8 +82,8 @@
 	<!-- All our code. write here   -->
 
 	
-<script src="jquery.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  <script src="jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html>

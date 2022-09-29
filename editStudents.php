@@ -4,35 +4,45 @@
    require_once('includes/links.php');
 ?>
 <body>
-	
 
 	<?php
       require_once('includes/header.php');
       require_once('includes/sidebar.php');
 
-      //Submit user data to database
-      //1. db connection
+      //Fetch students racords using WHERE CLAUSE
       require_once('dbconnection.php');
-      if(isset($_POST{'submitEnrollments'})){
-        //2. fetch form data
+      $fetchStudentRecords = mysqli_query($conn, "SELECT * FROM enrollments WHERE id='".$_GET['id']."' ");
+      while ($row = mysqli_fetch_array($fetchStudentRecords)){
+        $studentId = $row['id'];
+        $studentName = $row['name'];
+        $studentPhone = $row['phone'];
+        $studentRegNumber = $row['reg_number'];
+        $studentEmail = $row['email'];
+        $studentCourse = $row['course'];
+      }  
+    ?>  
+	
+
+    <?php
+       //isset function
+       if(isset($_POST['updateEnrollments'])){
+        //1.fetch form data
         $name = $_POST['name'];
-        $regnumber = $_POST['reg_number'];
+        $regNumber = $_POST['reg_number'];
         $phone = $_POST['phone'];
         $email = $_POST['email'];
         $course = $_POST['course'];
-
-        //3.SQL: Query to insert data to database
-        $queryData = mysqli_query($conn, "INSERT INTO enrollments(name,reg_number,phone,email,course) VALUES('$name','$regnumber','$phone','$email','$course') ");
-        //4. check if data inserted
-        if($queryData){
-            echo "Data submitted successfully";
+        //sql to update
+        $updateStudent = mysqli_query($conn,"UPDATE enrollments SET name= '$name',reg_number='$regNumber',phone='$phone',
+        email='$email',course='$course' WHERE id='".$_GET['id']."' ");
+        if ($updateStudent){
+            echo 'data updated successfully';
         }
         else{
-            echo "Error";
+            echo 'error occured';
         }
-      }
-    ?>  
-	
+       }
+    ?>
 	<div class="main-content">
 		<div class="container-fluid">
 			<div class="row">
@@ -40,22 +50,22 @@
 				<div class="col-lg-12">
 					<div class="card">
                         <div class="card-header bg-dark text-white text-centre">
-						      <span>Edit Students</span>
+						      <span>Update Students</span>
 					    </div>
                         <div class="card-body">
-                            <form action="editStudents.php" method="post">
+                            <form action="editStudents.php?id=<?php echo $studentId ?>" method="post">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="name">Name</label>
-                                            <input type="text" class="form-control" name="name" id="">
+                                            <input type="text" class="form-control" name="name" id="" value="<?php echo $studentName?>">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="reg_number">Reg-Number</label>
-                                            <input type="text" class="form-control" name="reg_number" id="">
+                                            <input type="text" class="form-control" name="reg_number" id="" value="<?php echo $studentRegNumber?>">
                                         </div>
                                     </div>
                                 </div>
@@ -64,14 +74,14 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="phone">Phone</label>
-                                            <input type="tel" class="form-control" name="phone" id="">
+                                            <input type="tel" class="form-control" name="phone" id="" value="<?php echo $studentPhone?>">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="email" class="form-control" name="email" id="">
+                                            <input type="email" class="form-control" name="email" id="" value="<?php echo $studentEmail?>">
                                         </div>
                                     </div>
                                 </div>
@@ -80,8 +90,8 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label for="course">Course</label>
-                                            <select class="form-control" name="course" id="">
-                                                <option value="">--select a course--</option>
+                                            <select class="form-control" name="course" id="" value="<?php echo $studentEnrolledOn?>">
+                                                <option><?php echo $studentCourse?></option>
                                                 <option value="Web Design & Development">Web Design & Development</option>
                                                 <option value="Android Application Development">Android Application Development</option>
                                                 <option value="Data Analysis">Data Analysis</option>
@@ -93,7 +103,7 @@
                                 <div class="row">
                                     <div class="col-lg-3" >
                                         <div class="form-group">
-                                            <button type="submit" name="submitEnrollments" class="btn btn-success">update</button>
+                                            <button type="submit" name="updateEnrollments" class="btn btn-success">update</button>
                                         </div>
                                     </div>
                             </form>  

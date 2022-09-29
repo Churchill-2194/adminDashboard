@@ -45,7 +45,7 @@
                                 <tbody>
                                     <?php while($row = mysqli_fetch_array($fetchEnrolledStudents)) { ?>
                                         <tr>
-                                              <td><?php echo $row['Id']?></td>
+                                              <td><?php echo $row['id']?></td>
                                               <td><?php echo $row['name']?></td>
                                               <td><?php echo $row['reg_number']?></td>
                                               <td><?php echo $row['phone']?></td>
@@ -53,7 +53,7 @@
                                               <td><?php echo $row['course']?></td>
                                               <td><?php echo $row['created_at']?></td>
                                               <td>
-                                                  <a href="" class="btn btn-primary btn-sm">
+                                                  <a href="editStudents.php?id=<?php echo $row['id']?>" class="btn btn-primary btn-sm">
                                                      <i class="fa fa-edit"></i>
                                                   </a>
                                                   <a href="" class="btn btn-success btn-sm">

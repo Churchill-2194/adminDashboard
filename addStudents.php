@@ -22,7 +22,8 @@
         $course = $_POST['course'];
 
         //3.SQL: Query to insert data to database
-        $queryData = mysqli_query($conn, "INSERT INTO enrollments(name,reg_number,phone,email,course) VALUES('$name','$regnumber','$phone','$email','$course') ");
+        $queryData = mysqli_query($conn, "INSERT INTO enrollments(name,reg_number,phone,email,course) 
+        VALUES('$name','$regnumber','$phone','$email','$course') ");
         //4. check if data inserted
         if($queryData){
             echo "Data submitted successfully";

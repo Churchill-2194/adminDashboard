@@ -25,8 +25,8 @@
 				   </a>
 				</li>
 
-				<li><a href="subscriptions.php">
-                         <span><i class="fa fa-user"></i></span>
+				<li><a href="subscribers.php">
+                         <span><i class="fa fa-envelope"></i></span>
 						 <span>Subscribe</span>
 				    </a>
 

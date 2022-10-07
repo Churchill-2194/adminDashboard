@@ -16,11 +16,11 @@
     
        if(isset($_POST['submitSubscribers'])){
        // 2 fetch from data
-       $name=$_POST["name"];
        $email=$_POST["email"];
    
        //3. SQL Query to insert data to database
-       $queryData = mysqli_query($conn, "INSERT INTO subscribers(name,email)VALUES('$name','$email') ");
+       $queryData = mysqli_query($conn, "INSERT INTO subscribers(email)
+        VALUES('$email') ");
        //4.check if data inserted
        if($queryData){
         echo "Data submitted successfully";
@@ -48,13 +48,6 @@
                                         <div class="form-group">
                                             <label for="email">Email</label>
                                             <input type="email" class="form-control" name="email" id="">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="name">Name</label>
-                                            <input type="name" class="form-control" name="name" id="">
                                         </div>
                                     </div>
                                 </div>

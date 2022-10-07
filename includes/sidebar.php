@@ -26,10 +26,17 @@
 				</li>
 
 				<li><a href="subscribers.php">
-                         <span><i class="fa fa-envelope"></i></span>
+                         <span><i class="fa fa-users"></i></span>
 						 <span>Subscribe</span>
 				    </a>
 
+				</li>
+
+				<li>
+					<a href="contactus.php">
+						<span><i class="fa fa-envelope"></i></span>
+						<span>Messages</span>
+					</a>
 				</li>
 			</ul>
 		</nav>
